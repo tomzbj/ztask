@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <sys/time.h>
+#include <unistd.h>
 #include "ztask.h"
 
 void tick_poll(void)
@@ -37,6 +38,7 @@ int main(void)
     while(1) {
         zt_poll();
         tick_poll();
+        usleep(500);
     }
 
     return 0;
