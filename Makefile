@@ -1,4 +1,4 @@
-CC   = gcc.exe 
+CC   = gcc
 OBJ  = main.o 
 LINKOBJ  = $(OBJ) $(RESOBJ)
 DEFS =
