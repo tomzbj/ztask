@@ -1,6 +1,10 @@
 #ifndef _ZTASK_H
 #define _ZTASK_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define ZT_MAX_TASKS 4
 
 typedef void (*zt_func_t)(void);
@@ -16,5 +20,9 @@ void zt_tick(void);
 
 void zt_start(int id);
 void zt_stop(int id);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
