@@ -1,9 +1,14 @@
 #ifndef _ZTASK_H
 #define _ZTASK_H
 
-#define ZT_MAX_TASKS 4
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef void (*zt_func_t)(void);
+
+// should be called first
+int zt_init(void *zt_mem, int size);
 
 // should be called in main loop
 void zt_poll(void);
@@ -16,5 +21,9 @@ void zt_tick(void);
 
 void zt_start(int id);
 void zt_stop(int id);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
