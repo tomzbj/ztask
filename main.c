@@ -32,6 +32,10 @@ void hello2(void)
 
 int main(void)
 {
+    char zt_mem[64];
+
+    zt_init(zt_mem, 64);
+
     zt_bind(hello, 50, 1);
     zt_bind(hello2, 80, 1);
 

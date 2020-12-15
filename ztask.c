@@ -9,8 +9,16 @@ typedef struct {
 static struct {
     unsigned long ticks;
     int num_tasks;
-    zt_task_t tasks[ZT_MAX_TASKS];
+    zt_task_t *tasks;
+    int tasks_size;
 } g;
+
+int zt_init(void *zt_mem, int size) {
+    g.tasks_size = size / sizeof(zt_task_t);
+    g.tasks = (zt_task_t *)zt_mem;
+
+    return g.tasks_size;
+}
 
 void zt_tick(void)
 {
@@ -30,13 +38,13 @@ void zt_poll(void)
 
 void zt_stop(int id)
 {
-    if (id < ZT_MAX_TASKS)
+    if (id < g.tasks_size)
         g.tasks[id].en = 0;
 }
 
 void zt_start(int id)
 {
-    if (id < ZT_MAX_TASKS) {
+    if (id < g.tasks_size) {
         if (g.tasks[id].en == 0)
             g.tasks[id].last_schedule = g.ticks - g.tasks[id].repeat; // schedule immediately
         g.tasks[id].en = 1;
@@ -45,7 +53,7 @@ void zt_start(int id)
 
 int zt_bind(zt_func_t func, int repeat, int en)
 {
-    if (g.num_tasks < ZT_MAX_TASKS) {
+    if (g.num_tasks < g.tasks_size) {
         g.tasks[g.num_tasks].func = func;
         g.tasks[g.num_tasks].repeat = repeat;
         g.tasks[g.num_tasks].last_schedule = g.ticks - repeat;

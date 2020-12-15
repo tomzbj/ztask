@@ -5,9 +5,10 @@
 extern "C" {
 #endif
 
-#define ZT_MAX_TASKS 4
-
 typedef void (*zt_func_t)(void);
+
+// should be called first
+int zt_init(void *zt_mem, int size);
 
 // should be called in main loop
 void zt_poll(void);
