@@ -3,7 +3,7 @@
 typedef struct {
     zt_func_t func;
     unsigned long last_schedule, repeat;
-    int en;
+    char en;
 } zt_task_t;
 
 static struct {
