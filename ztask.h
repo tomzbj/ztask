@@ -20,6 +20,7 @@ int zt_init(zt_cfg_t* cfg);
 void zt_poll(void);
 
 // repeat: repeat inteval;   en: start immediately or not
+// ret: task id, could be used for zt_start / zt_stop.
 int zt_bind(zt_func_t func, int repeat, int en);
 
 // should be called in systick_irqhandler
