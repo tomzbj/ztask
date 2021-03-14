@@ -1,14 +1,12 @@
 CC   = gcc
-OBJ  = main.o 
-LINKOBJ  = $(OBJ) $(RESOBJ)
 DEFS =
-CFLAGS = -Os -Wall
-LDFLAGS = 
-SRCS = main.c ztask.c
-
-OBJS    = $(ASRCS:.s=.o) $(SRCS:.c=.o) 
+CFLAGS = -Os -Wall -I../.. -I.
+LDFLAGS =
+SRCS = main.c ../../ztask.c
+OBJS    = $(ASRCS:.s=.o) $(SRCS:.c=.o)
+LINKOBJ  = $(OBJS) $(RESOBJ)
 TARGET  = main
-CFLAGS += $(UINCS)  
+CFLAGS += $(UINCS)
 RM = rm -f
 
 .PHONY: all all-before all-after clean clean-custom
