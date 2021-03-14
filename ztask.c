@@ -40,9 +40,10 @@ void zt_poll(void)
 {
     int i;
     for(i = 0; i < g.num_tasks; i++) {
+        unsigned long curr = g.tick_f();
         if(g.tasks[i].en
-            && (g.tick_f() - g.tasks[i].last_schedule >= g.tasks[i].repeat)) {
-            g.tasks[i].last_schedule = g.tick_f();
+            && (curr - g.tasks[i].last_schedule >= g.tasks[i].repeat)) {
+            g.tasks[i].last_schedule = curr;
             g.tasks[i].func();
         }
     }
