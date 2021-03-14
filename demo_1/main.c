@@ -33,11 +33,15 @@ void hello2(void)
 int main(void)
 {
     char zt_mem[64];
+    zt_cfg_t cfg;
+    cfg.zt_mem = zt_mem;
+    cfg.size = 64;
+    cfg.zt_tick_f = NULL;
 
-    zt_init(zt_mem, 64);
+    zt_init(&cfg);
 
-    zt_bind(hello, 50, 1);
-    zt_bind(hello2, 80, 1);
+    zt_bind(hello, 500, 1);
+    zt_bind(hello2, 1500, 1);
 
     while(1) {
         zt_poll();

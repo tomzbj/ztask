@@ -7,8 +7,14 @@ extern "C" {
 
 typedef void (*zt_func_t)(void);
 
+typedef struct {
+    void *zt_mem;
+    int size;
+    unsigned long (*zt_tick_f)(void);
+} zt_cfg_t;
+
 // should be called first
-int zt_init(void *zt_mem, int size);
+int zt_init(zt_cfg_t* cfg);
 
 // should be called in main loop
 void zt_poll(void);

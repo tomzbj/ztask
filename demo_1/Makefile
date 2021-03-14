@@ -2,9 +2,9 @@ CC   = gcc
 OBJ  = main.o 
 LINKOBJ  = $(OBJ) $(RESOBJ)
 DEFS =
-CFLAGS = -Os -Wall
+CFLAGS = -Os -Wall -I..
 LDFLAGS = 
-SRCS = main.c ztask.c
+SRCS = main.c ../ztask.c
 
 OBJS    = $(ASRCS:.s=.o) $(SRCS:.c=.o) 
 TARGET  = main
@@ -16,7 +16,7 @@ RM = rm -f
 all: $(OBJS) $(TARGET)
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) -I. $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean: clean-custom
 	${RM} $(LINKOBJ) $(TARGET) *~ .*.swp
