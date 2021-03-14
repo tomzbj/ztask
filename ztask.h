@@ -6,9 +6,10 @@ extern "C" {
 #endif
 
 typedef void (*zt_func_t)(void);
+typedef unsigned int (*zt_ticks_func_t)(void);
 
 // should be called first
-int zt_init(void *zt_mem, int size);
+int zt_init(void *zt_mem, int size, zt_ticks_func_t ext_ticks_func);
 
 // should be called in main loop
 void zt_poll(void);
