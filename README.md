@@ -2,6 +2,12 @@
 
 A very simple timer-based scheduler.
 
+-----updated 2023.3.14------
+
+增加了c++支持, 只需要include一个ztask.h即可.
+
+-----original----------
+
 就ztask.h和ztask.c俩文件，五个api.
 
 使用方法: 定义任务函数, 在进入主循环前执行zt_bind即可.
