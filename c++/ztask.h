@@ -10,13 +10,21 @@ typedef struct {
 } zt_task_t;
 
 class ztask {
+
 public:
     // apis
     ztask(int max_tasks)
     {
         _tasks = new zt_task_t[max_tasks];
         _max_tasks = max_tasks;
+        _millis_f = NULL;
     }
+    ztask(int max_tasks, unsigned long (*millis_f)(void)) :
+        ztask(max_tasks)
+    {
+        _millis_f = millis_f;
+    }
+
     ~ztask(void)
     {
         delete _tasks;
@@ -24,6 +32,8 @@ public:
     void poll(void)    // should be called in main loop
     {
         int i;
+        if(_millis_f != NULL)
+            _ticks = _millis_f();
         for(i = 0; i < _num_tasks; i++) {
             if(_ticks >= _tasks[i].timeout) {
                 _tasks[i].timeout = _ticks + _tasks[i].repeat;
@@ -32,7 +42,7 @@ public:
             }
         }
     }
-    void tick(void)    // should be called in systick_irqhandler
+    void tick(void)    // should be called in systick_irqhandler, do not need it if millis is used
     {
         _ticks++;
     }
@@ -59,12 +69,11 @@ public:
             _tasks[tid].en = 0;
     }
 
-    // static variables
-
 private:
     zt_task_t* _tasks;
     unsigned long _ticks;
     int _num_tasks, _max_tasks;
+    unsigned long (*_millis_f)(void);
 };
 
 #endif
